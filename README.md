@@ -1,2 +1,3 @@
-# mini-browser
-A lightweight C++23 and Qt6-powered mini web browser with built in search engine support.
+# MiniBrowser
+
+🚀 A lightweight C++23 + Qt6 powered mini web browser with integrated search engines and bookmarking support.
