@@ -1,10 +1,11 @@
-#include "MiniBrowser.h"
-#include <QtWidgets/QApplication>
+#include "mainwindow.h"
+
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MiniBrowser w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

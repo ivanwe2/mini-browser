@@ -76,3 +76,24 @@ build-*/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Build folders
+build*/
+*.pro.user
+*.pro.user.*
+CMakeFiles/
+CMakeCache.txt
+Makefile
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.exe
+*.app
+*.dSYM
+*.DS_Store
+*.user
+*.autosave
+.idea/
+.vscode/
