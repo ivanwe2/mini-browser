@@ -17,7 +17,8 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: 6.9.0
-        modules: webengine
+        arch: win64_msvc2019_64
+        modules: qtbase, webengine
 
     - name: Configure CMake
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release
