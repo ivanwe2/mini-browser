@@ -1,0 +1,27 @@
+# basic ci from the internet
+name: C++ Qt CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.6.1'
+
+    - name: Build project
+      run: |
+        qmake MiniBrowser.pro
+        make
