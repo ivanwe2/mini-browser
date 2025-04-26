@@ -30,3 +30,48 @@
 *.exe
 *.out
 *.app
+# Qt Creator / qmake
+*.pro.user
+*.pro.user.*
+*.qmake.stash
+*.autosave
+
+# Visual Studio / MSVC
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sdf
+*.opensdf
+*.suo
+*.ncb
+*.idb
+*.pdb
+*.ipch
+*.obj
+*.log
+*.tlog
+*.cache
+*.db
+*.VC.db
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Build output
+build-*/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.app
+*.dylib
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
