@@ -1,8 +1,9 @@
-name: Build MiniBrowser
+name: Build and Release MiniBrowser
 
 on:
   push:
-  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -15,28 +16,50 @@ jobs:
     - name: Install Qt
       uses: jurplel/install-qt-action@v3
       with:
-        version: 6.10.0
+        version: 6.9.0
         modules: webengine
 
     - name: Configure CMake
       run: cmake -B build -DCMAKE_BUILD_TYPE=Release
 
-    - name: Build with CMake
+    - name: Build
       run: cmake --build build --config Release
 
-    - name: Upload compiled EXE
+    - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
         name: MiniBrowser
-        path: |
-          build/Release/*.exe
+        path: build/Release/*.exe
 
-  release:
+  bump-version:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main'
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Bump version and push tag
+      uses: phips28/gh-action-bump-version@v11.0.4
+      with:
+        tag-prefix: "v"
+        default: patch
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs: bump-version
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Get current version
+      id: vars
+      run: echo "VERSION=$(cat VERSION)" >> $GITHUB_ENV
+
     - name: Download build artifacts
       uses: actions/download-artifact@v4
       with:
@@ -45,6 +68,8 @@ jobs:
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
+        tag_name: v${{ env.VERSION }}
+        name: Release v${{ env.VERSION }}
         files: |
           *.exe
       env:
